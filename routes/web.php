@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Notification;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.myLogin');
 });
+Route::get('/profile', function () {
+
+    return view('notification.profile');
+})->middleware(['auth'])->name('profile');
+
+Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
